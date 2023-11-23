@@ -17,58 +17,69 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
+          child: Stack(
             children: [
-              Image.asset('assets/images/signin_balls.png'),
-              const Text(
-                'Войти',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 45,
-                ),
-              ),
-              const SizedBox(height: 150),
-              LoginField(hintText: 'Email'),
-              const SizedBox(height: 15),
-              LoginField(hintText: 'Password'),
-              const SizedBox(height: 20),
-               GradientButton(
-                label: "Войти",
-                onTap: (){},
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              RichText(
-                text: TextSpan(
-                  text: 'Нет аккаунта?  ',
-                  style: TextStyle(color: Colors.grey, fontSize: 16),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Регистрация',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                          fontSize: 16),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          context.go('/');
-                        },
+              Center(child: Image.asset('assets/images/sparks.png')),
+              Center(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 150,
                     ),
+                    const Text(
+                      'Войти',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 45,
+                      ),
+                    ),
+                    const SizedBox(height: 150),
+                    LoginField(hintText: 'Email'),
+                    const SizedBox(height: 15),
+                    LoginField(hintText: 'Password'),
+                    const SizedBox(height: 20),
+                    GradientButton(
+                      label: "Войти",
+                      onTap: () {
+                        context.go('/shop_rewiew');
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text: 'Нет аккаунта?  ',
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Регистрация',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                                fontSize: 16),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                context.go('/');
+                              },
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          context.go('/frgpsw');
+                        },
+                        child: Text(
+                          "Забыли пароль?",
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                        ))
                   ],
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              TextButton(
-                  onPressed: () {
-                    context.go('/frgpsw');
-                  },
-                  child: Text(
-                    "Забыли пароль?",
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
-                  ))
             ],
           ),
         ),

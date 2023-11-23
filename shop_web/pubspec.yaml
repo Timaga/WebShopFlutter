@@ -40,6 +40,8 @@ dependencies:
   go_router: ^12.1.1
   hash: ^1.0.4
   crypto: ^3.0.3
+  hexcolor: ^3.0.1
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:

@@ -19,7 +19,7 @@ class RegistrationScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 300,
+                    height: 150,
                   ),
                   const Text(
                     'Регистрация',
