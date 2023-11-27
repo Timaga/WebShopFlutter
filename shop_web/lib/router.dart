@@ -7,9 +7,10 @@ import 'package:login/UI/authorithation/reg_verification_screen.dart';
 import 'package:login/UI/authorithation/registration_screen.dart';
 import 'package:login/UI/shop/shop_rewiew.dart';
 import 'package:login/route_constants.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class AppRouter {
-  GoRouter router = GoRouter(
+ final router = GoRouter(
     routes: [
       GoRoute(
         name: RouteConstants.registration,
@@ -54,5 +55,8 @@ class AppRouter {
         },
       ),
     ],
+    observers: [TalkerRouteObserver(Talker())],
   );
+
+
 }
