@@ -14,12 +14,11 @@ class ShopScreen extends StatefulWidget {
 class _ShopScreenState extends State<ShopScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SafeArea(
-          child: Align(
-        alignment: Alignment.topCenter,
-        child: Column(
+    return SingleChildScrollView(
+      child: Container(
+        color: Colors.white,
+        child: SafeArea(
+            child: Column(
           children: [
             Container(
               color: HexColor("181820"),
@@ -63,7 +62,7 @@ class _ShopScreenState extends State<ShopScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 120),
+            SizedBox(height: 100),
             Center(
                 child: Text("ТОВАРЫ ДНЯ",
                     style: GoogleFonts.raleway(
@@ -73,19 +72,16 @@ class _ShopScreenState extends State<ShopScreen> {
             SizedBox(
               height: 60,
             ),
-            Row(
+            Wrap(
+              direction: Axis.horizontal,
+              spacing: 60.0, // горизонтальное расстояние между элементами
+              runSpacing: 8.0,
               children: [
-                SizedBox(
-                  width: 60,
-                ),
                 CardProduct(
                   PathImage: "assets/images/mona.jpg",
                   price: 666,
                   title: "Название",
                   onpress: () {},
-                ),
-                SizedBox(
-                  width: 60,
                 ),
                 CardProduct(
                   PathImage: "assets/images/long_art.png",
@@ -96,8 +92,8 @@ class _ShopScreenState extends State<ShopScreen> {
               ],
             ),
           ],
-        ),
-      )),
+        )),
+      ),
     );
   }
 }

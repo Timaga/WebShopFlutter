@@ -42,26 +42,21 @@ class _CardProductState extends State<CardProduct> {
           SizedBox(
             height: 20,
           ),
-          Row(
-            children: [
-              Text(
-                "${widget.price} ₽",
-                style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                widget.title,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
+          Text(
+            "${widget.price} ₽",
+            style: TextStyle(
+                color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Text(
+            widget.title,
+            style: TextStyle(
+                color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 20,
           ),
         ],
       ),
