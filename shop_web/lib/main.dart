@@ -35,23 +35,26 @@ void main() async {
     log.message = details.exception.toString();
     final ipv4 = await Ipify.ipv4();
     log.ip = ipv4;
-    LogBlocBloc.add(LoadLogEvent());
+    print(log.route);
+    // LogBlocBloc.add(LoadLogEvent());
   };
   runZonedGuarded(
       () => runApp(MyApp(
             talker: talker,
+            log: log,
           )), (error, stack) async {
     talker.handle(error, stack);
     log.message = error.toString();
     final ipv4 = await Ipify.ipv4();
     log.ip = ipv4;
-    LogBlocBloc.add(LoadLogEvent());
+    // LogBlocBloc.add(LoadLogEvent());
   });
 }
 
 class MyApp extends StatelessWidget {
   Talker talker;
-  MyApp({super.key, required this.talker});
+  LogModel log;
+  MyApp({super.key, required this.talker,required this.log});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +63,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Pallete.backgroundColor,
       ),
-      routerConfig: AppRouter().router,
+      routerConfig: NyAppRouter.returnRouter(true,talker,log),
     );
   }
 }

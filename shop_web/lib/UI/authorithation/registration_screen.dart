@@ -6,6 +6,7 @@ import 'package:login/UI/design/gradient_button.dart';
 import 'package:login/UI/design/login_field.dart';
 
 class RegistrationScreen extends StatelessWidget {
+  
   const RegistrationScreen({Key? key}) : super(key: key);
 
   @override

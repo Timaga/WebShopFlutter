@@ -6,23 +6,32 @@ import 'package:login/UI/authorithation/login_screen.dart';
 import 'package:login/UI/authorithation/reg_verification_screen.dart';
 import 'package:login/UI/authorithation/registration_screen.dart';
 import 'package:login/UI/shop/shop_rewiew.dart';
+import 'package:login/models/LogModel.dart';
 import 'package:login/route_constants.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
-class AppRouter {
- final router = GoRouter(
-    routes: [
+
+
+class NyAppRouter {
+  static GoRouter returnRouter(bool isAuth,Talker talker,LogModel log) {
+
+    GoRouter router = GoRouter(
+      observers: [TalkerRouteObserver(talker)],
+      routes: [
+
       GoRoute(
-        name: RouteConstants.registration,
-        path: "/",
-        pageBuilder: (context, state) {
-          return const MaterialPage(child: RegistrationScreen());
-        },
-      ),
+          name: RouteConstants.registration,
+          path: '/',
+          pageBuilder: (context, state) {
+            log.route= state.fullPath;
+            return MaterialPage(child: RegistrationScreen());
+          },
+        ),
       GoRoute(
         name: RouteConstants.login,
         path: "/login",
         pageBuilder: (context, state) {
+          log.route= state.fullPath;
           return const MaterialPage(child: LoginScreen());
         },
       ),
@@ -30,6 +39,7 @@ class AppRouter {
         name: RouteConstants.forgotPassword,
         path: "/frgpsw",
         pageBuilder: (context, state) {
+          log.route= state.fullPath;
           return const MaterialPage(child: ForgotPasswordScreen());
         },
       ),
@@ -37,6 +47,7 @@ class AppRouter {
         name: RouteConstants.verification,
         path: "/verification",
         pageBuilder: (context, state) {
+          log.route= state.fullPath;
           return const MaterialPage(child: VerificationScreen());
         },
       ),
@@ -44,6 +55,7 @@ class AppRouter {
         name: RouteConstants.forgot_password_verification,
         path: "/frgpsw/verification",
         pageBuilder: (context, state) {
+          log.route= state.fullPath;
           return const MaterialPage(child: ForgotPasswordVerificationScreen());
         },
       ),
@@ -51,12 +63,12 @@ class AppRouter {
         name: RouteConstants.shop_rewiew,
         path: "/shop_rewiew",
         pageBuilder: (context, state) {
+          log.route= state.fullPath;
           return const MaterialPage(child: ShopRewiew());
         },
-      ),
-    ],
-    observers: [TalkerRouteObserver(Talker())],
-  );
-
-
+      ),   
+      ],
+    );
+    return router;
+  }
 }

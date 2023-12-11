@@ -14,3 +14,12 @@ class LoadLogEvent extends LogEvent {
   @override
   List<Object?> get props => [completer];
 }
+
+class GetLogEvent extends LogEvent {
+  GetLogEvent({this.completer});
+  final Completer? completer;
+
+  @override
+  List<Object?> get props => [completer];
+}
+

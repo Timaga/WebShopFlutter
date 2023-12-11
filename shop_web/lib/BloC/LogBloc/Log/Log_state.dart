@@ -1,7 +1,7 @@
-import 'package:equatable/equatable.dart';
+
 import 'package:login/models/LogModel.dart';
 
-abstract class LogState extends Equatable {
+abstract class LogState {
   LogState();
 
   @override
@@ -26,6 +26,13 @@ class LogLoaded extends LogState {
   });
 
   final String log;
+}
+class ListLogLoaded extends LogState {
+  ListLogLoaded({
+    required this.log,
+  });
+
+  final List<LogModel> log;
 }
 
 class LogLoadingFailure extends LogState {

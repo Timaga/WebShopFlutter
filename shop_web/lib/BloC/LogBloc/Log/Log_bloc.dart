@@ -13,13 +13,24 @@ class LogBloc extends Bloc<LogEvent, LogState> {
   final Dio dio;
   LogBloc(LogState initialState, this._logrepos, this._logmodel, this.dio)
       : super(initialState) {
+    on<GetLogEvent>((event, emit) async {
+      try {
+        if (state is! LogLoaded) {
+          emit(LogLoading());
+        }
+        final response = await _logrepos.getLogs();
+        emit(ListLogLoaded(log: response));
+      } catch (e) {
+        emit(LogLoadingFailure(exception: e));
+      }
+    });
     on<LogEvent>((event, emit) async {
       try {
         if (state is! LogLoaded) {
           emit(LogLoading());
         }
-        final response =
-            await _logrepos.sendLog(_logmodel.message!, _logmodel.ip!, dio);
+        final response = await _logrepos.sendLog(
+            _logmodel.message!, _logmodel.ip!, dio, _logmodel.route!);
         emit(LogLoaded(log: response));
       } catch (e) {
         emit(LogLoadingFailure(exception: e));

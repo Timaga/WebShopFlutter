@@ -9,6 +9,7 @@ import 'package:login/UI/design/gradient_button.dart';
 import 'package:login/UI/design/login_field.dart';
 
 import 'package:login/UI/design/social_button.dart';
+import 'package:login/UI/shop/administration_panel.dart';
 import 'package:login/UI/shop/shop.dart';
 
 class ShopRewiew extends StatefulWidget {
@@ -23,7 +24,7 @@ class _ShopRewiew extends State<ShopRewiew> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
         appBar: TabBar(tabs: [
           Tab(
@@ -37,7 +38,10 @@ class _ShopRewiew extends State<ShopRewiew> {
           ),
           Tab(
             icon: Icon(Icons.support_agent),
-          )
+          ),
+          Tab(
+            icon: Icon(Icons.admin_panel_settings_outlined),
+          ),
         ]),
         body: TabBarView(children: [
           ShopScreen(),
@@ -53,6 +57,7 @@ class _ShopRewiew extends State<ShopRewiew> {
             color: Colors.blue,
             child: Icon(Icons.support_agent),
           ),
+          AdminScreen(),
         ]),
       ),
     );
