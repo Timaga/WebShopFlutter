@@ -39,22 +39,37 @@ class _ShopScreenState extends State<ShopScreen> {
                       AppBarText(
                         ChangedColor: Colors.blueGrey,
                         title: "Все",
+                        onPressed: (){
+                          
+                        },
                       ),
                       AppBarText(
                         ChangedColor: Colors.greenAccent,
                         title: "Багет",
+                        onPressed: (){
+                          
+                        },
                       ),
                       AppBarText(
                         ChangedColor: Colors.cyan,
                         title: "Картины",
+                        onPressed: (){
+                          
+                        },
                       ),
                       AppBarText(
                         ChangedColor: Colors.red,
                         title: "Краски",
+                        onPressed: (){
+
+                        },
                       ),
                       AppBarText(
                         ChangedColor: Colors.orangeAccent,
                         title: "Кисти",
+                        onPressed: (){
+
+                        },
                       ),
                     ],
                   ),

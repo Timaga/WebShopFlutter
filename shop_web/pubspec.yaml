@@ -48,6 +48,8 @@ dependencies:
   dio: ^5.4.0
   dart_ipify: ^1.1.1
   talker_dio_logger: ^2.3.2
+  fl_chart: ^0.65.0
+  lottie: ^2.7.0
 
 dev_dependencies:
   flutter_test:

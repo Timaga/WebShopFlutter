@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppBarText extends StatefulWidget {
   final Color ChangedColor;
+  Function onPressed;
   final String title;
-  const AppBarText(
-      {super.key, required this.ChangedColor, required this.title});
+AppBarText(
+      {super.key, required this.ChangedColor, required this.title,required this.onPressed});
 
   @override
   State<AppBarText> createState() => _AppBarTextState();
@@ -15,7 +16,10 @@ class _AppBarTextState extends State<AppBarText> {
   Widget build(BuildContext context) {
     return Expanded(
         child: TextButton(
-      onPressed: () {},
+      onPressed: () {
+        widget.onPressed();
+
+      },
       style: ButtonStyle(
         overlayColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {

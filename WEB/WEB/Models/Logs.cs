@@ -6,6 +6,7 @@
         public string message { get; set; }
         public DateTime data { get; set; }
         public string ip { get; set; }
-  
+        public string route { get; set; }
+
     }
 }
