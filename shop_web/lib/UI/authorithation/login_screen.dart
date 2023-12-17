@@ -69,14 +69,14 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    TextButton(
-                        onPressed: () {
-                          context.go('/frgpsw');
-                        },
-                        child: Text(
-                          "Забыли пароль?",
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
-                        ))
+                    // TextButton(
+                    //     onPressed: () {
+                    //       context.go('/frgpsw');
+                    //     },
+                    //     child: Text(
+                    //       "Забыли пароль?",
+                    //       style: TextStyle(fontSize: 16, color: Colors.grey),
+                    //     ))
                   ],
                 ),
               ),

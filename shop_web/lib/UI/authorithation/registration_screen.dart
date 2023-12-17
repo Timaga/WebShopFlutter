@@ -1,16 +1,33 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:login/BloC/AuthBloc/AuthBloc_bloc.dart';
+import 'package:login/BloC/AuthBloc/index.dart';
 import 'package:login/UI/authorithation/reg_verification_screen.dart';
 import 'package:login/UI/design/gradient_button.dart';
 import 'package:login/UI/design/login_field.dart';
+import 'package:login/UI/design/palette.dart';
+import 'package:login/models/AuthModel.dart';
+import 'package:login/repos/AuthRepus.dart';
 
 class RegistrationScreen extends StatelessWidget {
-  
-  const RegistrationScreen({Key? key}) : super(key: key);
+  bool Iscreare = false;
+  AuthModel model = AuthModel();
+  var dio = Dio();
+  AuthRepository logrepos = AuthRepository();
+
+  RegistrationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var blocblocAuth = AuthBlocBloc(AuthInitial(), model, logrepos, dio);
+    String a;
+    
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -30,16 +47,104 @@ class RegistrationScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 100),
-                  LoginField(hintText: 'Email'),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: 300,
+                    ),
+                    child: TextFormField(
+                      onChanged: (value) {
+                        List<int> bytes = utf8.encode(
+                            value); // Преобразование текста в байтовый массив
+                        Digest digest = sha256.convert(bytes);
+                        String hashedText =
+                            digest.toString(); // Преобразование хеша в строку
+                        model?.login = value;
+                        print(hashedText);
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(27),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Pallete.borderColor,
+                            width: 3,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Pallete.gradient2,
+                            width: 3,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        hintText: 'Email',
+                      ),
+                    ),
+                  ),
+                  // LoginField(
+                  //   hintText: 'Email',
+                  // ),
                   const SizedBox(height: 15),
-                  LoginField(hintText: 'Password'),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: 300,
+                    ),
+                    child: TextFormField(
+                      onChanged: (value) {
+                        List<int> bytes = utf8.encode(
+                            value); // Преобразование текста в байтовый массив
+                        Digest digest = sha256.convert(bytes);
+                        String hashedText =
+                            digest.toString(); // Преобразование хеша в строку
+                        model?.password = hashedText;
+                        print(hashedText);
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(27),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Pallete.borderColor,
+                            width: 3,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Pallete.gradient2,
+                            width: 3,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        hintText: 'Password',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  if (Iscreare == true)
+                    Text(
+                      "Логин уже существует",
+                      style: TextStyle(color: Colors.red, fontSize: 26),
+                    ),
                   const SizedBox(height: 20),
                   GradientButton(
                     label: "Зарегестрироваться",
                     onTap: () {
-                      context.pushReplacement("/verification");
+                      blocblocAuth.add(AuthEvent());
                     },
                   ),
+                  BlocBuilder<AuthBlocBloc, AuthBlocState>(
+                      bloc: blocblocAuth,
+                      builder: (context, state) {
+                        if (state is AuthLoaded) {
+                          Iscreare = false;
+                          context.pushReplacement("/shop_rewiew");
+                        } else if (state is AuthLoadingFailure) {
+                         
+                          Iscreare = true;
+                        }
+                        return Container();
+                      }),
+
                   const SizedBox(height: 20),
                   RichText(
                     text: TextSpan(

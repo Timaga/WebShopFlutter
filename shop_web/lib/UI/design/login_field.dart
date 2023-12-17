@@ -22,8 +22,7 @@ class LoginField extends StatelessWidget {
       ),
       child: TextFormField(
         onChanged: (value) {
-          List<int> bytes =
-              utf8.encode(value); // Преобразование текста в байтовый массив
+          List<int> bytes =utf8.encode(value); // Преобразование текста в байтовый массив
           Digest digest = sha256.convert(bytes);
           String hashedText = digest.toString(); // Преобразование хеша в строку
 
