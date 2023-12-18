@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 using System.Text;
 using WEB.Models;
@@ -58,6 +59,35 @@ namespace WEB.Controllers
                 command.Parameters.AddWithValue("login", login);
                 command.Parameters.AddWithValue("password", password);
                 command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return Ok(true);
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public IActionResult Login(string login, string password)
+        {
+            var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.Development.json").Build();
+            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            {
+                connection.Open();
+                var checkCommand = new NpgsqlCommand("select count(*) from auth where login = @login", connection);
+                checkCommand.Parameters.AddWithValue("login", login);
+                var existingCount = (Int64)checkCommand.ExecuteScalar();
+
+                if (existingCount == 0)
+                {
+
+                    return BadRequest("Логин не существует");
+                }
+                var checkCommand1 = new NpgsqlCommand("SELECT password FROM auth WHERE login = @login", connection);
+                checkCommand1.Parameters.AddWithValue("login", login);             
+                var passwordFromDB = (string)checkCommand1.ExecuteScalar();
+                if (!passwordFromDB.Equals(password))
+                {
+                    return BadRequest("Неверный пароль");
+                }
                 connection.Close();
             }
             return Ok(true);
