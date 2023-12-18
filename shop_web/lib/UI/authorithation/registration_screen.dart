@@ -6,6 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:login/BloC/AuthBloc/AuthBloc_bloc.dart';
 import 'package:login/BloC/AuthBloc/index.dart';
 import 'package:login/UI/authorithation/reg_verification_screen.dart';
@@ -15,19 +16,22 @@ import 'package:login/UI/design/palette.dart';
 import 'package:login/models/AuthModel.dart';
 import 'package:login/repos/AuthRepus.dart';
 
-class RegistrationScreen extends StatelessWidget {
+class RegistrationScreen extends StatefulWidget {
+  RegistrationScreen({Key? key}) : super(key: key);
+  @override
+  _RegistrationScreenState createState() => _RegistrationScreenState();
+}
+
+class _RegistrationScreenState extends State<RegistrationScreen> {
   bool Iscreare = false;
   AuthModel model = AuthModel();
   var dio = Dio();
   AuthRepository logrepos = AuthRepository();
-
-  RegistrationScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     var blocblocAuth = AuthBlocBloc(AuthInitial(), model, logrepos, dio);
     String a;
-    
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -120,10 +124,14 @@ class RegistrationScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  if (Iscreare == true)
+                  
+                   if (Iscreare == true)
                     Text(
                       "Логин уже существует",
-                      style: TextStyle(color: Colors.red, fontSize: 26),
+                      style: GoogleFonts.roboto(
+                        color: Colors.red,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400),
                     ),
                   const SizedBox(height: 20),
                   GradientButton(
@@ -132,17 +140,19 @@ class RegistrationScreen extends StatelessWidget {
                       blocblocAuth.add(AuthEvent());
                     },
                   ),
-                  BlocBuilder<AuthBlocBloc, AuthBlocState>(
+                  BlocListener<AuthBlocBloc, AuthBlocState>(
                       bloc: blocblocAuth,
-                      builder: (context, state) {
+                      child: Container(),
+                      listener: (context, state) {
                         if (state is AuthLoaded) {
                           Iscreare = false;
                           context.pushReplacement("/shop_rewiew");
                         } else if (state is AuthLoadingFailure) {
-                         
-                          Iscreare = true;
+                          setState(() {
+                              Iscreare = true;
+                          });
+                        
                         }
-                        return Container();
                       }),
 
                   const SizedBox(height: 20),
