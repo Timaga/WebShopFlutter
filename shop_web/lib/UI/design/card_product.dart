@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 
 class CardProduct extends StatefulWidget {
   final String PathImage;
-  final int price;
+  final double price;
   final String title;
+  Image photo;
   final Function onpress;
-  const CardProduct(
+  CardProduct(
       {super.key,
       required this.PathImage,
       required this.price,
       required this.title,
-      required this.onpress});
+      required this.onpress,
+      required this.photo});
 
   @override
   State<CardProduct> createState() => _CardProductState();
@@ -34,7 +36,7 @@ class _CardProductState extends State<CardProduct> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image(
-                image: AssetImage(widget.PathImage),
+                image: widget.photo.image,
                 fit: BoxFit.cover,
               ),
             ),

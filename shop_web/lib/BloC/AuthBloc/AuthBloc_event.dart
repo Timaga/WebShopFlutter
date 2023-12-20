@@ -16,3 +16,11 @@ class AuthEvent extends AuthBlocEvent {
   @override
   List<Object?> get props => [completer];
 }
+
+class AuthLoginEvent extends AuthBlocEvent {
+  AuthLoginEvent({this.completer});
+  final Completer? completer;
+
+  @override
+  List<Object?> get props => [completer];
+}

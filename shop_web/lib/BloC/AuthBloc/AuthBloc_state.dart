@@ -27,6 +27,15 @@ class AuthLoaded extends AuthBlocState {
   final String auth;
 }
 
+class AuthLoginLoaded extends AuthBlocState {
+  AuthLoginLoaded({
+    required this.auth,
+  });
+
+  final String auth;
+}
+
+
 
 class AuthLoadingFailure extends AuthBlocState {
   AuthLoadingFailure({

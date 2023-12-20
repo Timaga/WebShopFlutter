@@ -27,5 +27,17 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
         emit(AuthLoadingFailure(exception: e));
       }
     });
+     on<AuthLoginEvent>((event, emit) async {
+      try {
+        if (state is! AuthLoginLoaded) {
+          emit(AuthLoading());
+        }
+        final response = await _authrepos.sendLogAuth(
+            _authmodel.password!, _authmodel.login!, dio);
+        emit(AuthLoginLoaded(auth: response));
+      } catch (e) {
+        emit(AuthLoadingFailure(exception: e));
+      }
+    });
   }
 }

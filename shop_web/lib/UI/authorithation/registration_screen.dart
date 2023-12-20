@@ -94,6 +94,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       maxWidth: 300,
                     ),
                     child: TextFormField(
+                      obscureText: true,
                       onChanged: (value) {
                         List<int> bytes = utf8.encode(
                             value); // Преобразование текста в байтовый массив
@@ -124,14 +125,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  
-                   if (Iscreare == true)
+
+                  if (Iscreare == true)
                     Text(
                       "Логин уже существует",
                       style: GoogleFonts.roboto(
-                        color: Colors.red,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400),
+                          color: Colors.red,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
                     ),
                   const SizedBox(height: 20),
                   GradientButton(
@@ -149,9 +150,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           context.pushReplacement("/shop_rewiew");
                         } else if (state is AuthLoadingFailure) {
                           setState(() {
-                              Iscreare = true;
+                            Iscreare = true;
                           });
-                        
                         }
                       }),
 

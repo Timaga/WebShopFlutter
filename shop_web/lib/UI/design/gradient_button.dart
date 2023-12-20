@@ -38,9 +38,7 @@ class _GradientButtonState extends State<GradientButton> {
         child: Text(
           widget.label,
           style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 17,
-          ),
+              fontWeight: FontWeight.w600, fontSize: 17, color: Colors.white),
         ),
       ),
     );
