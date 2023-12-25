@@ -90,7 +90,63 @@ namespace WEB.Controllers
                 }
                 connection.Close();
             }
+            var configuration1 = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.Development.json").Build();
+            List<auth> departments = new List<auth>();
+            using (var connection1 = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            {
+                connection1.Open();
+                var command1 = new NpgsqlCommand("select * from auth", connection1);
+                var reader1 = command1.ExecuteReader();
+                while (reader1.Read())
+                {
+
+                    var department = new auth
+                    {
+                        id = reader1.GetInt32(0),
+                        login = reader1.GetString(1),
+
+                    };
+                    if (department.login == login)
+                    {
+                        departments.Add(department);
+                        return Ok(reader1.GetInt32(0));
+                    }
+                }
+                connection1.Close();
+            }
             return Ok(true);
+        }
+
+
+        [HttpGet]
+        [Route("selectById")]
+        public IActionResult SelectById(int id)
+        {
+            var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.Development.json").Build();
+            List<auth> departments = new List<auth>();
+            using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+            {
+                connection.Open();
+                var command = new NpgsqlCommand("select * from auth", connection);
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    var department = new auth
+                    {
+                        id = reader.GetInt32(0),
+                        login = reader.GetString(1),
+                        password = reader.GetString(2),
+
+                    };
+                    if (id == department.id)
+                    {
+                        departments.Add(department);
+                    }
+                }
+                connection.Close();
+            }
+            return Ok(departments);
         }
     }
 }

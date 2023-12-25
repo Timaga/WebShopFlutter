@@ -4,10 +4,10 @@ import 'package:login/models/LogModel.dart';
 import 'package:login/models/Products.dart';
 
 class ProductRepository {
-  Future<String> sendProduct(
-      String title, double price, Dio dio, XFile imageFile) async {
+  Future<String> sendProduct(String title, double price, Dio dio,
+      XFile imageFile, String category) async {
     var url =
-        'http://localhost:5071/api/Product/insert?title=${title}&price=${price}'; // Замените на свой URL
+        'http://localhost:5071/api/Product/insert?title=${title}&price=${price}&category=${category}'; // Замените на свой URL
 
     try {
       var fileBytes = await imageFile.readAsBytes();

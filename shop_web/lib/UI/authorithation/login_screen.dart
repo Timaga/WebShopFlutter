@@ -139,11 +139,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (state is AuthLoginLoaded) {
                             Iscreate = false;
                             if (IsAdmin == false) {
-                              context.pushReplacement("/shop_rewiew");
-                            } else {
+                              model.id = int.parse(state.auth);
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => ShopRewiew(
                                         Isadmin: IsAdmin,
+                                        id_cust: model.id!,
+                                        login: model.login!
+                                      )));
+                            } else {
+                              model.id = int.parse(state.auth);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ShopRewiew(
+                                        Isadmin: IsAdmin,
+                                        id_cust: model.id!,
+                                        login: model.login!
                                       )));
                             }
                           } else if (state is AuthLoadingFailure) {

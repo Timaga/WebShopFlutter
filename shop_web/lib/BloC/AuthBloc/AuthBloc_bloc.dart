@@ -37,6 +37,7 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
         emit(AuthLoginLoaded(auth: response));
       } catch (e) {
         emit(AuthLoadingFailure(exception: e));
+        
       }
     });
   }

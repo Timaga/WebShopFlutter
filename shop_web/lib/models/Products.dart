@@ -6,14 +6,15 @@ class ProductsModel {
   String? photo;
   int? id;
   XFile? file;
-
-  ProductsModel({this.title, this.price, this.photo, this.id});
+  String? category;
+  ProductsModel({this.title, this.price, this.photo, this.id, this.category});
 
   ProductsModel.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     price = json['price'];
     photo = json['photo'];
     id = json['id'];
+    category = json['category'];
   }
 
   Map<String, dynamic> toJson() {
@@ -22,6 +23,7 @@ class ProductsModel {
     data['price'] = this.price;
     data['photo'] = this.photo;
     data['id'] = this.id;
+    data['category'] = this.category;
     return data;
   }
 }

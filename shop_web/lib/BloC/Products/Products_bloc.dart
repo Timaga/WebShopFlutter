@@ -16,7 +16,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       : super(initialState) {
     on<LoadListProductsEvent>((event, emit) async {
       try {
-        if (state is! ProductsLoaded) {
+        if (state is! ListProductsLoaded) {
           emit(ProductsLoading());
         }
         final response = await _productrepos.getProducts();
@@ -31,8 +31,12 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
           emit(ProductsLoading());
         }
 
-        final response = await _productrepos.sendProduct(_productmodel.title!,
-            _productmodel.price!, dio, _productmodel.file!);
+        final response = await _productrepos.sendProduct(
+            _productmodel.title!,
+            _productmodel.price!,
+            dio,
+            _productmodel.file!,
+            _productmodel.category!);
         emit(ProductsLoaded(product: response));
       } catch (e) {
         emit(ProductsLoadingFailure(exception: e));
