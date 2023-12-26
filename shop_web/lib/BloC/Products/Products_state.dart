@@ -33,6 +33,13 @@ class ListProductsLoaded extends ProductsState {
 
   final List<ProductsModel> products;
 }
+class ListProductsByIdLoaded extends ProductsState {
+  ListProductsByIdLoaded({
+    required this.products,
+  });
+
+  final List<ProductsModel> products;
+}
 
 class ProductsLoadingFailure extends ProductsState {
   ProductsLoadingFailure({

@@ -1,13 +1,22 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:login/BloC/Orders/index.dart';
+import 'package:login/models/orderModel.dart';
+import 'package:login/repos/orderRepos.dart';
 
 class CardProduct extends StatefulWidget {
   final String PathImage;
   final double price;
   final String title;
+  final int id;
+  final int id_cust;
+
   Image photo;
-  final Function onpress;
+  final VoidCallback onpress;
   CardProduct(
       {super.key,
+      required this.id_cust,
+      required this.id,
       required this.PathImage,
       required this.price,
       required this.title,
@@ -19,11 +28,19 @@ class CardProduct extends StatefulWidget {
 }
 
 class _CardProductState extends State<CardProduct> {
+  OrderModel order_model = OrderModel();
+  OrderRepository orderrepos = OrderRepository();
+  var dio = Dio();
+
   @override
   Widget build(BuildContext context) {
+    var blocblocOrder =
+        OrdersBloc(OrderInitial(), order_model, orderrepos, dio);
     return InkWell(
       onTap: () {
-        widget.onpress;
+        order_model.product_id = widget.id;
+        order_model.customer_id = widget.id_cust;
+        blocblocOrder.add(OrderAddEvent());
       },
       child: Column(
         children: [

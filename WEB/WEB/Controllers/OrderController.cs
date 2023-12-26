@@ -57,5 +57,28 @@ namespace WEB.Controllers
             }
             return Ok(true);
         }
+
+        [HttpDelete]
+        [Route("delete")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.Development.json").Build();
+                using (var connection = new NpgsqlConnection(configuration.GetConnectionString("DefaultConnection")))
+                {
+                    connection.Open();
+                    var command = new NpgsqlCommand("delete from orders where id = @id", connection);
+                    command.Parameters.AddWithValue("id", id);
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+                return Ok(true);
+            }
+            catch
+            {
+                return Ok(false);
+            }
+        }
     }
 }

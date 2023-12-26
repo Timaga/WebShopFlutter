@@ -19,8 +19,8 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
         if (state is! OrderLoaded) {
           emit(OrderLoading());
         }
-        final response = await _orderrepos.sendOrder(_ordermodel.id!, dio,
-            _ordermodel.customer_id!, _ordermodel.product_id!);
+        final response = await _orderrepos.sendOrder(
+            dio, _ordermodel.customer_id!, _ordermodel.product_id!);
         emit(OrderLoaded(log: response));
       } catch (e) {
         emit(OrderLoadingFailure(exception: e));

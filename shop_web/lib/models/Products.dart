@@ -7,7 +7,14 @@ class ProductsModel {
   int? id;
   XFile? file;
   String? category;
-  ProductsModel({this.title, this.price, this.photo, this.id, this.category});
+  late int id_ord;
+  ProductsModel(
+      {this.title,
+      this.price,
+      this.photo,
+      this.id,
+      this.category,
+      this.id_ord = 0});
 
   ProductsModel.fromJson(Map<String, dynamic> json) {
     title = json['title'];

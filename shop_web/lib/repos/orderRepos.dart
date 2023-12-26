@@ -6,7 +6,7 @@ import 'package:login/models/orderModel.dart';
 
 class OrderRepository {
   Future<String> sendOrder(
-      int id, Dio dio, int customer_id, int product_id) async {
+      Dio dio, int customer_id, int product_id) async {
     var url =
         'http://localhost:5071/api/Order/add?customer_id=${customer_id}&product_id=${product_id}'; // Замените на свой URL
 
@@ -41,6 +41,29 @@ class OrderRepository {
       }
     } catch (e) {
       throw Exception('Failed to load orders: $e');
+    }
+  }
+
+  Future<String> DeleteOrder(int id) async {
+    var dio = Dio(); // Создайте экземпляр Dio
+
+    var url =
+        'http://localhost:5071/api/Order/delete?id=${id}'; // Замените на свой URL
+
+    try {
+      var response = await dio.delete(
+        url,
+      );
+
+      if (response.statusCode == 200) {
+        print('JSON отправлен успешно');
+        final data = response.data;
+        return data.toString();
+      } else {
+        throw Exception('Failed to load Link');
+      }
+    } catch (e) {
+      throw Exception('Failed to load  Link: $e');
     }
   }
 }

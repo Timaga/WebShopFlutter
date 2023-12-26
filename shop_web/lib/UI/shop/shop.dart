@@ -26,7 +26,7 @@ import 'package:file_selector/file_selector.dart';
 import 'package:image_picker_web/image_picker_web.dart';
 
 class ShopScreen extends StatefulWidget {
-  ShopScreen({super.key, this.IsAdmin = false, this.id_cust = 0});
+  ShopScreen({super.key, this.IsAdmin = false, required this.id_cust});
   bool IsAdmin;
   int id_cust;
   @override
@@ -198,6 +198,8 @@ class _ShopScreenState extends State<ShopScreen> {
                               final bytes = base64Decode(i.photo!);
                               final image = Image.memory(bytes);
                               products.add(CardProduct(
+                                id_cust: widget.id_cust,
+                                id: i.id!,
                                 PathImage: '',
                                 price: i.price!,
                                 title: i.title!,
@@ -208,9 +210,10 @@ class _ShopScreenState extends State<ShopScreen> {
                                 },
                                 photo: image,
                               ));
-
                               if (i.category == "картина") {
                                 prodArt.add(CardProduct(
+                                   id_cust: widget.id_cust,
+                                  id: i.id!,
                                   PathImage: '',
                                   price: i.price!,
                                   title: i.title!,
@@ -224,6 +227,8 @@ class _ShopScreenState extends State<ShopScreen> {
                               }
                               if (i.category == "краска") {
                                 prodPaints.add(CardProduct(
+                                   id_cust: widget.id_cust,
+                                  id: i.id!,
                                   PathImage: '',
                                   price: i.price!,
                                   title: i.title!,
@@ -237,6 +242,8 @@ class _ShopScreenState extends State<ShopScreen> {
                               }
                               if (i.category == "багет") {
                                 prodBaget.add(CardProduct(
+                                   id_cust: widget.id_cust,
+                                  id: i.id!,
                                   PathImage: '',
                                   price: i.price!,
                                   title: i.title!,
@@ -250,6 +257,8 @@ class _ShopScreenState extends State<ShopScreen> {
                               }
                               if (i.category == "кисточка") {
                                 prodBrushes.add(CardProduct(
+                                   id_cust: widget.id_cust,
+                                  id: i.id!,
                                   PathImage: '',
                                   price: i.price!,
                                   title: i.title!,

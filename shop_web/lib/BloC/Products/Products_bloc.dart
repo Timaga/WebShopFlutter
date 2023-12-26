@@ -11,6 +11,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final ProductRepository _productrepos;
   final ProductsModel _productmodel;
   final Dio dio;
+  List<int> id = [];
   ProductsBloc(ProductsState initialState, this._productmodel,
       this._productrepos, this.dio)
       : super(initialState) {
@@ -25,6 +26,17 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         emit(ProductsLoadingFailure(exception: e));
       }
     });
+    // on<LoadListProductsByIdEvent>((event, emit) async {
+    //   try {
+    //     if (state is! ListProductsByIdLoaded) {
+    //       emit(ProductsLoading());
+    //     }
+    //     final response = await _productrepos.getProductsById(_productmodel.id!);
+    //     emit(ListProductsByIdLoaded(products: ));
+    //   } catch (e) {
+    //     emit(ProductsLoadingFailure(exception: e));
+    //   }
+    // });
     on<LoadProductsEvent>((event, emit) async {
       try {
         if (state is! ProductsLoaded) {

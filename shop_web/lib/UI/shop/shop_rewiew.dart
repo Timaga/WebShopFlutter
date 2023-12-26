@@ -12,13 +12,17 @@ import 'package:login/UI/design/social_button.dart';
 import 'package:login/UI/shop/administration_panel.dart';
 import 'package:login/UI/shop/profile_panel.dart';
 import 'package:login/UI/shop/shop.dart';
+import 'package:login/UI/shop/shop_cart.dart';
 
 class ShopRewiew extends StatefulWidget {
   bool Isadmin;
   int id_cust;
   String login = "";
   ShopRewiew(
-      {Key? key, required this.Isadmin, this.id_cust = 0, this.login = " "})
+      {Key? key,
+      required this.Isadmin,
+      required this.id_cust,
+      this.login = " "})
       : super(key: key);
 
   @override
@@ -53,11 +57,11 @@ class _ShopRewiew extends State<ShopRewiew> {
               body: TabBarView(children: [
                 ShopScreen(
                   IsAdmin: widget.Isadmin,
+                  id_cust: widget.id_cust,
                 ),
                 ProfileScreen(id: widget.id_cust),
-                Container(
-                  color: Colors.green,
-                  child: Icon(Icons.shopping_bag),
+                CartScreen(
+                  id_cust: widget.id_cust,
                 ),
                 Container(
                   color: Colors.blue,
@@ -85,14 +89,15 @@ class _ShopRewiew extends State<ShopRewiew> {
                 ),
               ]),
               body: TabBarView(children: [
-                ShopScreen(),
+                ShopScreen(
+                  id_cust: widget.id_cust,
+                ),
                 ProfileScreen(
                   id: widget.id_cust,
                   login: widget.login,
                 ),
-                Container(
-                  color: Colors.green,
-                  child: Icon(Icons.shopping_bag),
+                CartScreen(
+                  id_cust: widget.id_cust,
                 ),
                 Container(
                   color: Colors.blue,

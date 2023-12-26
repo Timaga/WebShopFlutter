@@ -7,15 +7,14 @@ class OrderModel {
 
   OrderModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    customer_id = json['customer_id'];
-    product_id = json['product_id'];
-   
+    customer_id = json['id_customer'];
+    product_id = json['id_product'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['customer_id'] = this.customer_id;
-    data['product_id'] = this.product_id;
+    data['id_customer'] = this.customer_id;
+    data['id_product'] = this.product_id;
     data['id'] = this.id;
     return data;
   }

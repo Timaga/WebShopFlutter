@@ -47,4 +47,34 @@ class ProductRepository {
       throw Exception('Failed to load Products: $e');
     }
   }
+
+  Future<ProductsModel> getProductsById(int id) async {
+    try {
+      final response =
+          await Dio().get("http://localhost:5071/api/Product/GetById?id=${id}");
+      if (response.statusCode == 200) {
+        final data = response.data;
+        if (data is List) {
+          // Handle list response
+          if (data.isNotEmpty) {
+            final productData = data.first;
+            final productsModel = ProductsModel.fromJson(productData);
+            return productsModel;
+          } else {
+            throw Exception('No product found');
+          }
+        } else if (data is Map<String, dynamic>) {
+          // Handle single object response
+          final productsModel = ProductsModel.fromJson(data);
+          return productsModel;
+        } else {
+          throw Exception('Invalid response format');
+        }
+      } else {
+        throw Exception('Failed to load Products');
+      }
+    } catch (e) {
+      throw Exception('Failed to load Products: $e');
+    }
+  }
 }

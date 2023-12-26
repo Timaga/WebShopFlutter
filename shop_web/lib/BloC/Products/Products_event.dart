@@ -22,3 +22,12 @@ class LoadListProductsEvent extends ProductsEvent {
   @override
   List<Object?> get props => [completer];
 }
+
+class LoadListProductsByIdEvent extends ProductsEvent {
+  LoadListProductsByIdEvent({this.completer});
+  final Completer? completer;
+
+  @override
+  List<Object?> get props => [completer];
+}
+

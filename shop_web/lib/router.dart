@@ -61,7 +61,7 @@ class NyAppRouter {
           path: "/shop_rewiew",
           pageBuilder: (context, state) {
             log.route = state.fullPath;
-            return MaterialPage(child: ShopRewiew(Isadmin: false));
+            return MaterialPage(child: ShopRewiew(Isadmin: false,id_cust: 1,));
           },
         ),
       ],
